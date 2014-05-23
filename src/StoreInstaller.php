@@ -31,16 +31,13 @@ class StoreInstaller {
 	private function newLabelTable() {
 		$table = new Table( $this->config->getLabelTableName() );
 
-		$table->addColumn( 'item_id', Type::BIGINT );
-		$table->addColumn( 'item_json', Type::BLOB );
-		$table->addColumn( 'page_title', Type::STRING, array( 'length' => 255 ) );
-		$table->addColumn( 'revision_id', Type::BIGINT );
-		$table->addColumn( 'revision_time', Type::STRING, array( 'length' => 25 ) );
+		$table->addColumn( 'text', Type::STRING, array( 'length' => 255 ) );
+		$table->addColumn( 'text_lowercase', Type::STRING, array( 'length' => 255 ) );
+		$table->addColumn( 'language', Type::STRING, array( 'length' => 16 ) );
+		$table->addColumn( 'entity', Type::STRING, array( 'length' => 32 ) );
 
-		$table->addIndex( array( 'item_id' ) );
-		$table->addIndex( array( 'page_title' ) );
-		$table->addIndex( array( 'revision_id' ) );
-		$table->addIndex( array( 'revision_time' ) );
+		$table->addIndex( array( 'text_lowercase', 'language' ) );
+		$table->addIndex( array( 'entity', 'language' ) );
 
 		return $table;
 	}

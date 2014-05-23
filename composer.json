@@ -1,5 +1,5 @@
 {
-	"name": "queryr/dump-store",
+	"name": "queryr/term-store",
 	"require": {
 		"php": ">=5.5.0",
 

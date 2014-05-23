@@ -1,4 +1,4 @@
-# QueryR Term Store
+# QueryR TermStore
 
 Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 

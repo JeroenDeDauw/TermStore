@@ -1,0 +1,22 @@
+{
+	"name": "queryr/dump-store",
+	"require": {
+		"php": ">=5.5.0",
+
+		"doctrine/dbal": "~2.4.2"
+	},
+	"require-dev": {
+		"ext-sqlite3": "*",
+		"whatthejeff/nyancat-phpunit-resultprinter": "~1.2"
+	},
+	"autoload": {
+		"psr-4": {
+			"Queryr\\TermStore\\": "src/"
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "0.1.x-dev"
+		}
+	}
+}

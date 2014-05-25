@@ -35,9 +35,11 @@ class StoreInstaller {
 		$table->addColumn( 'text_lowercase', Type::STRING, array( 'length' => 255 ) );
 		$table->addColumn( 'language', Type::STRING, array( 'length' => 16 ) );
 		$table->addColumn( 'entity', Type::STRING, array( 'length' => 32 ) );
+		$table->addColumn( 'entity_type', Type::STRING, array( 'length' => 16 ) );
 
 		$table->addIndex( array( 'text_lowercase', 'language' ) );
 		$table->addIndex( array( 'entity', 'language' ) );
+		$table->addIndex( array( 'entity_type' ) );
 
 		return $table;
 	}

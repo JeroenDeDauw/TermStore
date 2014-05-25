@@ -7,6 +7,7 @@ use Queryr\TermStore\TermStore;
 use Queryr\TermStore\StoreConfig;
 use Queryr\TermStore\StoreInstaller;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Fingerprint;
 
 /**
  * @covers Queryr\TermStore\TermStore
@@ -35,8 +36,30 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->store = new TermStore( $connection, $config );
 	}
 
-	public function testGivenNotMatchingArgs_getTermByIdAndLanguageReturnsNull() {
-		$this->assertNull( $this->store->getTermByIdAndLanguage( new ItemId( 'Q1337' ), 'en' ) );
+//	public function testGivenNotMatchingArgs_getTermByIdAndLanguageReturnsNull() {
+//		$this->assertNull( $this->store->getLabelByIdAndLanguage( new ItemId( 'Q1337' ), 'en' ) );
+//	}
+
+	public function testStoreIdAndFingerprint() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'en label' );
+		$fingerprint->setLabel( 'de', 'de label' );
+		$fingerprint->setDescription( 'en', 'en description' );
+		$fingerprint->setAliasGroup( 'en', [ 'first en alias', 'second en alias' ] );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertEquals(
+			'en label',
+			$this->store->getLabelByIdAndLanguage( $id, 'en' )
+		);
+
+		$this->assertEquals(
+			'de label',
+			$this->store->getLabelByIdAndLanguage( $id, 'de' )
+		);
 	}
 
 }

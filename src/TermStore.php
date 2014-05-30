@@ -181,22 +181,10 @@ class TableQueryExecutor {
 	}
 
 	public function selectOne( array $fieldNames = null, array $conditions = [] ) {
-		$statement = $this->executeSelect( $fieldNames, $conditions );
+		$statement = $this->executeSelect( $fieldNames, $conditions, 1 );
 
 		$result = $statement->fetch();
 		return  $result === false ? null : $result;
-	}
-
-	private function executeSelect( array $fieldNames = null, array $conditions = [] ) {
-		$fieldSql = $this->getFieldSql( $fieldNames );
-		$conditionSql = $this->getConditionSql( $conditions );
-
-		$sql = 'SELECT ' . $fieldSql . ' FROM ' . $this->tableName . ' WHERE ' . $conditionSql;
-
-		$statement = $this->connection->prepare( $sql );
-		$statement->execute( array_values( $conditions ) );
-
-		return $statement;
 	}
 
 	public function select( array $fieldNames = null, array $conditions = [] ) {
@@ -211,6 +199,28 @@ class TableQueryExecutor {
 			},
 			$this->select( [ $fieldName ], $conditions )
 		);
+	}
+
+	private function executeSelect( array $fieldNames = null, array $conditions = [], $limit = null ) {
+		$sql = $this->buildSelectSql( $fieldNames, $conditions, $limit );
+
+		$statement = $this->connection->prepare( $sql );
+		$statement->execute( array_values( $conditions ) );
+
+		return $statement;
+	}
+
+	private function buildSelectSql( array $fieldNames = null, array $conditions = [], $limit = null ) {
+		$fieldSql = $this->getFieldSql( $fieldNames );
+		$conditionSql = $this->getConditionSql( $conditions );
+
+		$sql = 'SELECT ' . $fieldSql . ' FROM ' . $this->tableName . ' WHERE ' . $conditionSql;
+
+		if ( $limit !== null ) {
+			$sql .= ' LIMIT ' . (int)$limit;
+		}
+
+		return $sql;
 	}
 
 	private function getFieldSql( array $fields = null ) {

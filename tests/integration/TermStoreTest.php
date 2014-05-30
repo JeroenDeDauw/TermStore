@@ -82,4 +82,28 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testStoreFingerprintRemovesOldData() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'en label' );
+		$fingerprint->setLabel( 'de', 'de label' );
+		$fingerprint->setAliasGroup( 'en', [ 'first en alias', 'second en alias' ] );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'de', 'new de label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertEquals(
+			'new de label',
+			$this->store->getLabelByIdAndLanguage( $id, 'de' )
+		);
+
+		$this->assertNull( $this->store->getLabelByIdAndLanguage( $id, 'en' ) );
+		$this->assertEmpty( $this->store->getAliasesByIdAndLanguage( $id, 'en' ) );
+	}
+
 }

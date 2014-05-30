@@ -43,6 +43,8 @@ class TermStore {
 	}
 
 	public function storeEntityFingerprint( EntityId $id, Fingerprint $fingerprint ) {
+		$this->dropTermsForId( $id );
+
 		/**
 		 * @var Term $label
 		 */
@@ -56,6 +58,18 @@ class TermStore {
 		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
 			$this->storeAliases( $aliasGroup, $id );
 		}
+	}
+
+	public function dropTermsForId( EntityId $id ) {
+		$this->connection->delete(
+			$this->config->getLabelTableName(),
+			[ 'entity_id' => $id->getSerialization() ]
+		);
+
+		$this->connection->delete(
+			$this->config->getAliasesTableName(),
+			[ 'entity_id' => $id->getSerialization() ]
+		);
 	}
 
 	private function storeLabel( $languageCode, $text, EntityId $id ) {

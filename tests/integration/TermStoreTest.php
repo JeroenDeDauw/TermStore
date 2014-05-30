@@ -51,17 +51,17 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
 
-		$this->assertEquals(
+		$this->assertSame(
 			'en label',
 			$this->store->getLabelByIdAndLanguage( $id, 'en' )
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'de label',
 			$this->store->getLabelByIdAndLanguage( $id, 'de' )
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			[ 'first en alias', 'second en alias' ],
 			$this->store->getAliasesByIdAndLanguage( $id, 'en' )
 		);
@@ -76,7 +76,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Q1337',
 			$this->store->getIdByLabel( 'en', 'en label' )
 		);
@@ -127,7 +127,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Q1337',
 			$this->store->getIdByText( 'en', 'kittens' )
 		);
@@ -150,9 +150,23 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
 
-		$this->assertEquals(
+		$this->assertSame(
 			'Q42',
 			$this->store->getIdByText( 'en', 'kittens' )
+		);
+	}
+
+	public function testByLabelLookupIsCaseInsensitive() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'EN label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertSame(
+			'Q1337',
+			$this->store->getIdByLabel( 'en', 'en LABEL' )
 		);
 	}
 

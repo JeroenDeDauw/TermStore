@@ -3,6 +3,7 @@
 namespace Queryr\TermStore;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -31,45 +32,72 @@ class TermStore {
 	 * @param string $languageCode
 	 *
 	 * @return string|null
+	 * @throws TermStoreException
 	 */
 	public function getLabelByIdAndLanguage( EntityId $id, $languageCode ) {
-		return $this->labelTable->selectOneField(
-			'text',
-			[
-				'entity_id' => $id->getSerialization(),
-				'language' => $languageCode
-			]
-		);
+		try {
+			return $this->labelTable->selectOneField(
+				'text',
+				[
+					'entity_id' => $id->getSerialization(),
+					'language' => $languageCode
+				]
+			);
+		}
+		catch ( DBALException $ex ) {
+			throw new TermStoreException( $ex->getMessage(), $ex );
+		}
 	}
 
+	/**
+	 * @param EntityId $id
+	 * @param Fingerprint $fingerprint
+	 *
+	 * @throws TermStoreException
+	 */
 	public function storeEntityFingerprint( EntityId $id, Fingerprint $fingerprint ) {
 		$this->dropTermsForId( $id );
 
-		/**
-		 * @var Term $label
-		 */
-		foreach ( $fingerprint->getLabels() as $label ) {
-			$this->storeLabel( $label->getLanguageCode(), $label->getText(), $id );
-		}
+		try {
+			/**
+			 * @var Term $label
+			 */
+			foreach ( $fingerprint->getLabels() as $label ) {
+				$this->storeLabel( $label->getLanguageCode(), $label->getText(), $id );
+			}
 
-		/**
-		 * @var AliasGroup $aliasGroup
-		 */
-		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
-			$this->storeAliases( $aliasGroup, $id );
+			/**
+			 * @var AliasGroup $aliasGroup
+			 */
+			foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
+				$this->storeAliases( $aliasGroup, $id );
+			}
+		}
+		catch ( DBALException $ex ) {
+			throw new TermStoreException( $ex->getMessage(), $ex );
 		}
 	}
 
+	/**
+	 * @param EntityId $id
+	 *
+	 * @throws TermStoreException
+	 */
 	public function dropTermsForId( EntityId $id ) {
-		$this->connection->delete(
-			$this->config->getLabelTableName(),
-			[ 'entity_id' => $id->getSerialization() ]
-		);
+		try {
+			$this->connection->delete(
+				$this->config->getLabelTableName(),
+				[ 'entity_id' => $id->getSerialization() ]
+			);
 
-		$this->connection->delete(
-			$this->config->getAliasesTableName(),
-			[ 'entity_id' => $id->getSerialization() ]
-		);
+			$this->connection->delete(
+				$this->config->getAliasesTableName(),
+				[ 'entity_id' => $id->getSerialization() ]
+			);
+		}
+		catch ( DBALException $ex ) {
+			throw new TermStoreException( $ex->getMessage(), $ex );
+		}
 	}
 
 	private function storeLabel( $languageCode, $text, EntityId $id ) {
@@ -105,15 +133,21 @@ class TermStore {
 	 * @param string $labelText
 	 *
 	 * @return string|null
+	 * @throws TermStoreException
 	 */
 	public function getIdByLabel( $labelLanguageCode, $labelText ) {
-		return $this->labelTable->selectOneField(
-			'entity_id',
-			[
-				'text_lowercase' => strtolower( $labelText ),
-				'language' => $labelLanguageCode
-			]
-		);
+		try {
+			return $this->labelTable->selectOneField(
+				'entity_id',
+				[
+					'text_lowercase' => strtolower( $labelText ),
+					'language' => $labelLanguageCode
+				]
+			);
+		}
+		catch ( DBALException $ex ) {
+			throw new TermStoreException( $ex->getMessage(), $ex );
+		}
 	}
 
 	/**
@@ -121,15 +155,21 @@ class TermStore {
 	 * @param string $languageCode
 	 *
 	 * @return string[]
+	 * @throws TermStoreException
 	 */
 	public function getAliasesByIdAndLanguage( EntityId $id, $languageCode ) {
-		return $this->aliasesTable->selectField(
-			'text',
-			[
-				'entity_id' => $id->getSerialization(),
-				'language' => $languageCode
-			]
-		);
+		try {
+			return $this->aliasesTable->selectField(
+				'text',
+				[
+					'entity_id' => $id->getSerialization(),
+					'language' => $languageCode
+				]
+			);
+		}
+		catch ( DBALException $ex ) {
+			throw new TermStoreException( $ex->getMessage(), $ex );
+		}
 	}
 
 	/**
@@ -137,6 +177,7 @@ class TermStore {
 	 * @param string $termText
 	 *
 	 * @return string|null
+	 * @throws TermStoreException
 	 */
 	public function getIdByText( $languageCode, $termText ) {
 		$labelMatch = $this->getIdByLabel( $languageCode, $termText );
@@ -153,15 +194,21 @@ class TermStore {
 	 * @param string $aliasText
 	 *
 	 * @return string|null
+	 * @throws TermStoreException
 	 */
 	private function getIdByAlias( $aliasLanguageCode, $aliasText ) {
-		return $this->aliasesTable->selectOneField(
-			'entity_id',
-			[
-				'text_lowercase' => strtolower( $aliasText ),
-				'language' => $aliasLanguageCode
-			]
-		);
+		try {
+			return $this->aliasesTable->selectOneField(
+				'entity_id',
+				[
+					'text_lowercase' => strtolower( $aliasText ),
+					'language' => $aliasLanguageCode
+				]
+			);
+		}
+		catch ( DBALException $ex ) {
+			throw new TermStoreException( $ex->getMessage(), $ex );
+		}
 	}
 
 }

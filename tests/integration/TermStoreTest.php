@@ -36,9 +36,9 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->store = new TermStore( $connection, $config );
 	}
 
-//	public function testGivenNotMatchingArgs_getTermByIdAndLanguageReturnsNull() {
-//		$this->assertNull( $this->store->getLabelByIdAndLanguage( new ItemId( 'Q1337' ), 'en' ) );
-//	}
+	public function testGivenNotMatchingArgs_getTermByIdAndLanguageReturnsNull() {
+		$this->assertNull( $this->store->getLabelByIdAndLanguage( new ItemId( 'Q1337' ), 'en' ) );
+	}
 
 	public function testStoreIdAndFingerprint() {
 		$id = new ItemId( 'Q1337' );

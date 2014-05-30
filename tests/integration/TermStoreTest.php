@@ -77,7 +77,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
 
 		$this->assertEquals(
-			$id,
+			'Q1337',
 			$this->store->getIdByLabel( 'en', 'en label' )
 		);
 	}
@@ -104,6 +104,56 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertNull( $this->store->getLabelByIdAndLanguage( $id, 'en' ) );
 		$this->assertEmpty( $this->store->getAliasesByIdAndLanguage( $id, 'en' ) );
+	}
+
+	public function testGivenNonMatchingArgs_getAliasesReturnsEmptyArray() {
+		$this->assertSame( [], $this->store->getAliasesByIdAndLanguage( new ItemId( 'Q1337' ), 'en' ) );
+	}
+
+	public function testGetIdByTextReturnsMatchBasedOnLabel() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'kittens' );
+		$fingerprint->setAliasGroup( 'en', [ 'first en alias', 'second en alias' ] );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$id = new ItemId( 'Q42' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'foobar' );
+		$fingerprint->setAliasGroup( 'en', [ 'kittens', 'first en alias' ] );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertEquals(
+			'Q1337',
+			$this->store->getIdByText( 'en', 'kittens' )
+		);
+	}
+
+	public function testGetIdByTextReturnsAliasBasedMatchIfNoLabelsMatch() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'foobar' );
+		$fingerprint->setAliasGroup( 'en', [ 'first en alias', 'second en alias' ] );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$id = new ItemId( 'Q42' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'foobar' );
+		$fingerprint->setAliasGroup( 'en', [ 'kittens', 'first en alias' ] );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertEquals(
+			'Q42',
+			$this->store->getIdByText( 'en', 'kittens' )
+		);
 	}
 
 }

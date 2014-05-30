@@ -132,6 +132,38 @@ class TermStore {
 		);
 	}
 
+	/**
+	 * @param string $languageCode
+	 * @param string $termText
+	 *
+	 * @return string|null
+	 */
+	public function getIdByText( $languageCode, $termText ) {
+		$labelMatch = $this->getIdByLabel( $languageCode, $termText );
+
+		if ( $labelMatch !== null ) {
+			return $labelMatch;
+		}
+
+		return $this->getIdByAlias( $languageCode, $termText );
+	}
+
+	/**
+	 * @param string $aliasLanguageCode
+	 * @param string $aliasText
+	 *
+	 * @return string|null
+	 */
+	private function getIdByAlias( $aliasLanguageCode, $aliasText ) {
+		return $this->aliasesTable->selectOneField(
+			'entity_id',
+			[
+				'text_lowercase' => strtolower( $aliasText ),
+				'language' => $aliasLanguageCode
+			]
+		);
+	}
+
 }
 
 class TableQueryExecutor {

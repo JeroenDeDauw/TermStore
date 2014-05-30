@@ -60,6 +60,11 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 			'de label',
 			$this->store->getLabelByIdAndLanguage( $id, 'de' )
 		);
+
+		$this->assertEquals(
+			[ 'first en alias', 'second en alias' ],
+			$this->store->getAliasesByIdAndLanguage( $id, 'en' )
+		);
 	}
 
 	public function testGetIdByLabelAndLanguage() {

@@ -26,6 +26,7 @@ class StoreInstaller {
 	 */
 	public function install() {
 		$this->schemaManager->createTable( $this->newLabelTable() );
+		$this->schemaManager->createTable( $this->newAliasesTable() );
 	}
 
 	private function newLabelTable() {
@@ -34,11 +35,27 @@ class StoreInstaller {
 		$table->addColumn( 'text', Type::STRING, array( 'length' => 255 ) );
 		$table->addColumn( 'text_lowercase', Type::STRING, array( 'length' => 255 ) );
 		$table->addColumn( 'language', Type::STRING, array( 'length' => 16 ) );
-		$table->addColumn( 'entity', Type::STRING, array( 'length' => 32 ) );
+		$table->addColumn( 'entity_id', Type::STRING, array( 'length' => 32 ) );
 		$table->addColumn( 'entity_type', Type::STRING, array( 'length' => 16 ) );
 
 		$table->addIndex( array( 'text_lowercase', 'language' ) );
-		$table->addIndex( array( 'entity', 'language' ) );
+		$table->addIndex( array( 'entity_id', 'language' ) );
+		$table->addIndex( array( 'entity_type' ) );
+
+		return $table;
+	}
+
+	private function newAliasesTable() {
+		$table = new Table( $this->config->getAliasesTableName() );
+
+		$table->addColumn( 'text', Type::STRING, array( 'length' => 255 ) );
+		$table->addColumn( 'text_lowercase', Type::STRING, array( 'length' => 255 ) );
+		$table->addColumn( 'language', Type::STRING, array( 'length' => 16 ) );
+		$table->addColumn( 'entity_id', Type::STRING, array( 'length' => 32 ) );
+		$table->addColumn( 'entity_type', Type::STRING, array( 'length' => 16 ) );
+
+		$table->addIndex( array( 'text_lowercase', 'language' ) );
+		$table->addIndex( array( 'entity_id', 'language' ) );
 		$table->addIndex( array( 'entity_type' ) );
 
 		return $table;
@@ -46,6 +63,7 @@ class StoreInstaller {
 
 	public function uninstall() {
 		$this->schemaManager->dropTable( $this->config->getLabelTableName() );
+		$this->schemaManager->dropTable( $this->config->getAliasesTableName() );
 	}
 
 }

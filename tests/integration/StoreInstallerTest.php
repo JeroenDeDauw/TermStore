@@ -39,10 +39,12 @@ class StoreInstallerTest extends \PHPUnit_Framework_TestCase {
 		$this->storeInstaller->install();
 
 		$this->assertTrue( $this->schemaManager->tablesExist( 'kittens_labels' ) );
+		$this->assertTrue( $this->schemaManager->tablesExist( 'kittens_aliases' ) );
 
 		$this->storeInstaller->uninstall();
 
 		$this->assertFalse( $this->schemaManager->tablesExist( 'kittens_labels' ) );
+		$this->assertFalse( $this->schemaManager->tablesExist( 'kittens_aliases' ) );
 	}
 
 	public function testStoresPage() {

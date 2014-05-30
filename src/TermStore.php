@@ -23,11 +23,17 @@ class TermStore {
 		$this->config = $config;
 	}
 
+	/**
+	 * @param EntityId $id
+	 * @param string $languageCode
+	 *
+	 * @return string|null
+	 */
 	public function getLabelByIdAndLanguage( EntityId $id, $languageCode ) {
 		return $this->labelTable->selectOneField(
 			'text',
 			[
-				'entity' => $id->getSerialization(),
+				'entity_id' => $id->getSerialization(),
 				'language' => $languageCode
 			]
 		);
@@ -49,8 +55,24 @@ class TermStore {
 				'text' => $text,
 				'text_lowercase' => strtolower( $text ),
 				'language' => $languageCode,
-				'entity' => $id->getSerialization(),
+				'entity_id' => $id->getSerialization(),
 				'entity_type' => $id->getEntityType()
+			]
+		);
+	}
+
+	/**
+	 * @param string $labelLanguageCode
+	 * @param string $labelText
+	 *
+	 * @return string|null
+	 */
+	public function getIdByLabel( $labelLanguageCode, $labelText ) {
+		return $this->labelTable->selectOneField(
+			'entity_id',
+			[
+				'text_lowercase' => strtolower( $labelText ),
+				'language' => $labelLanguageCode
 			]
 		);
 	}

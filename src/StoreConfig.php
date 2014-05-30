@@ -18,4 +18,8 @@ class StoreConfig {
 		return $this->prefix . 'labels';
 	}
 
+	public function getAliasesTableName() {
+		return $this->prefix . 'aliases';
+	}
+
 }

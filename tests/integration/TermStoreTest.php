@@ -62,4 +62,19 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testGetIdByLabelAndLanguage() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'en label' );
+		$fingerprint->setLabel( 'de', 'de label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertEquals(
+			$id,
+			$this->store->getIdByLabel( 'en', 'en label' )
+		);
+	}
+
 }

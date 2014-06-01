@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\Term;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermStore {
+class TermStore implements LabelLookup {
 
 	private $connection;
 	private $config;

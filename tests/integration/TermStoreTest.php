@@ -3,9 +3,9 @@
 namespace Tests\Queryr\TermStore;
 
 use Doctrine\DBAL\DriverManager;
-use Queryr\TermStore\TermStore;
 use Queryr\TermStore\StoreConfig;
 use Queryr\TermStore\StoreInstaller;
+use Queryr\TermStore\TermStore;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 

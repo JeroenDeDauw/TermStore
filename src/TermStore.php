@@ -20,7 +20,7 @@ class TermStore implements LabelLookup {
 	private $labelTable;
 	private $aliasesTable;
 
-	public function __construct( Connection $connection, StoreConfig $config ) {
+	public function __construct( Connection $connection, TermStoreConfig $config ) {
 		$this->labelTable = new TableQueryExecutor( $connection, $config->getLabelTableName() );
 		$this->aliasesTable = new TableQueryExecutor( $connection, $config->getAliasesTableName() );
 		$this->connection = $connection;

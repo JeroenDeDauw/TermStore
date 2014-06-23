@@ -11,12 +11,12 @@ use Doctrine\DBAL\Types\Type;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StoreInstaller {
+class TermStoreInstaller {
 
 	private $schemaManager;
 	private $config;
 
-	public function __construct( AbstractSchemaManager $schemaManager, StoreConfig $config ) {
+	public function __construct( AbstractSchemaManager $schemaManager, TermStoreConfig $config ) {
 		$this->schemaManager = $schemaManager;
 		$this->config = $config;
 	}

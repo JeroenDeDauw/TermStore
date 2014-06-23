@@ -3,7 +3,7 @@
 namespace Tests\Queryr\TermStore;
 
 use Doctrine\DBAL\DriverManager;
-use Queryr\TermStore\StoreConfig;
+use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStore;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -27,7 +27,7 @@ class TermStoreExceptionTest extends \PHPUnit_Framework_TestCase {
 			'memory' => true,
 		) );
 
-		$this->store = new TermStore( $connection, new StoreConfig( '' ) );
+		$this->store = new TermStore( $connection, new TermStoreConfig( '' ) );
 	}
 
 	public function testInsertWhenStoreNotInstalledCausesTermStoreException() {

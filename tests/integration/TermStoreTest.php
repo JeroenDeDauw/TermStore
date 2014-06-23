@@ -3,8 +3,8 @@
 namespace Tests\Queryr\TermStore;
 
 use Doctrine\DBAL\DriverManager;
-use Queryr\TermStore\StoreConfig;
-use Queryr\TermStore\StoreInstaller;
+use Queryr\TermStore\TermStoreConfig;
+use Queryr\TermStore\TermStoreInstaller;
 use Queryr\TermStore\TermStore;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -28,9 +28,9 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 			'memory' => true,
 		) );
 
-		$config = new StoreConfig( '' );
+		$config = new TermStoreConfig( '' );
 
-		$installer = new StoreInstaller( $connection->getSchemaManager(), $config );
+		$installer = new TermStoreInstaller( $connection->getSchemaManager(), $config );
 		$installer->install();
 
 		$this->store = new TermStore( $connection, $config );

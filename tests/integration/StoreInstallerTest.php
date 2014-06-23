@@ -4,8 +4,8 @@ namespace Tests\Queryr\TermStore;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
-use Queryr\TermStore\StoreConfig;
-use Queryr\TermStore\StoreInstaller;
+use Queryr\TermStore\TermStoreConfig;
+use Queryr\TermStore\TermStoreInstaller;
 
 /**
  * @covers Queryr\TermStore\StoreInstaller
@@ -16,7 +16,7 @@ use Queryr\TermStore\StoreInstaller;
 class StoreInstallerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var StoreInstaller
+	 * @var TermStoreInstaller
 	 */
 	private $storeInstaller;
 
@@ -32,7 +32,7 @@ class StoreInstallerTest extends \PHPUnit_Framework_TestCase {
 		) );
 
 		$this->schemaManager = $connection->getSchemaManager();
-		$this->storeInstaller = new StoreInstaller( $this->schemaManager, new StoreConfig( 'kittens_' ) );
+		$this->storeInstaller = new TermStoreInstaller( $this->schemaManager, new TermStoreConfig( 'kittens_' ) );
 	}
 
 	public function testInstallationAndRemoval() {

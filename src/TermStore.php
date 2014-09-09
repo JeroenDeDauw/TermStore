@@ -129,6 +129,8 @@ class TermStore implements LabelLookup {
 	}
 
 	/**
+	 * Returns the first matching entity id. Case insensitive.
+	 *
 	 * @param string $labelLanguageCode
 	 * @param string $labelText
 	 *
@@ -173,6 +175,8 @@ class TermStore implements LabelLookup {
 	}
 
 	/**
+	 * Returns the first matching entity id. Case insensitive.
+	 *
 	 * @param string $languageCode
 	 * @param string $termText
 	 *

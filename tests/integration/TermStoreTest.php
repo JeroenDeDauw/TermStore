@@ -2,9 +2,6 @@
 
 namespace Tests\Queryr\TermStore;
 
-use Doctrine\DBAL\DriverManager;
-use Queryr\TermStore\TermStoreConfig;
-use Queryr\TermStore\TermStoreInstaller;
 use Queryr\TermStore\TermStore;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -24,17 +21,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	private $store;
 
 	public function setUp() {
-		$connection = DriverManager::getConnection( array(
-			'driver' => 'pdo_sqlite',
-			'memory' => true,
-		) );
-
-		$config = new TermStoreConfig( '' );
-
-		$installer = new TermStoreInstaller( $connection->getSchemaManager(), $config );
-		$installer->install();
-
-		$this->store = new TermStore( $connection, $config );
+		$this->store = TestEnvironment::newInstance()->getFactory()->newTermStore();
 	}
 
 	public function testGivenNotMatchingArgs_getTermByIdAndLanguageReturnsNull() {

@@ -15,16 +15,15 @@ use Wikibase\DataModel\Term\Term;
  */
 class TermStore implements LabelLookup, EntityIdLookup {
 
-	private $connection;
-	private $config;
+	private $storeWriter;
 	private $labelTable;
 	private $aliasesTable;
 
 	public function __construct( Connection $connection, TermStoreConfig $config ) {
+		$this->storeWriter = new TermStoreWriter( $connection, $config );
+
 		$this->labelTable = new TableQueryExecutor( $connection, $config->getLabelTableName() );
 		$this->aliasesTable = new TableQueryExecutor( $connection, $config->getAliasesTableName() );
-		$this->connection = $connection;
-		$this->config = $config;
 	}
 
 	/**
@@ -56,26 +55,7 @@ class TermStore implements LabelLookup, EntityIdLookup {
 	 * @throws TermStoreException
 	 */
 	public function storeEntityFingerprint( EntityId $id, Fingerprint $fingerprint ) {
-		$this->dropTermsForId( $id );
-
-		try {
-			/**
-			 * @var Term $label
-			 */
-			foreach ( $fingerprint->getLabels() as $label ) {
-				$this->storeLabel( $label->getLanguageCode(), $label->getText(), $id );
-			}
-
-			/**
-			 * @var AliasGroup $aliasGroup
-			 */
-			foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
-				$this->storeAliases( $aliasGroup, $id );
-			}
-		}
-		catch ( DBALException $ex ) {
-			throw new TermStoreException( $ex->getMessage(), $ex );
-		}
+		$this->storeWriter->storeEntityFingerprint( $id, $fingerprint );
 	}
 
 	/**
@@ -84,48 +64,7 @@ class TermStore implements LabelLookup, EntityIdLookup {
 	 * @throws TermStoreException
 	 */
 	public function dropTermsForId( EntityId $id ) {
-		try {
-			$this->connection->delete(
-				$this->config->getLabelTableName(),
-				[ 'entity_id' => $id->getSerialization() ]
-			);
-
-			$this->connection->delete(
-				$this->config->getAliasesTableName(),
-				[ 'entity_id' => $id->getSerialization() ]
-			);
-		}
-		catch ( DBALException $ex ) {
-			throw new TermStoreException( $ex->getMessage(), $ex );
-		}
-	}
-
-	private function storeLabel( $languageCode, $text, EntityId $id ) {
-		$this->connection->insert(
-			$this->config->getLabelTableName(),
-			[
-				'text' => $text,
-				'text_lowercase' => strtolower( $text ),
-				'language' => $languageCode,
-				'entity_id' => $id->getSerialization(),
-				'entity_type' => $id->getEntityType()
-			]
-		);
-	}
-
-	private function storeAliases( AliasGroup $aliasGroup, EntityId $id ) {
-		foreach ( $aliasGroup->getAliases() as $alias ) {
-			$this->connection->insert(
-				$this->config->getAliasesTableName(),
-				[
-					'text' => $alias,
-					'text_lowercase' => strtolower( $alias ),
-					'language' => $aliasGroup->getLanguageCode(),
-					'entity_id' => $id->getSerialization(),
-					'entity_type' => $id->getEntityType()
-				]
-			);
-		}
+		$this->storeWriter->dropTermsForId( $id );
 	}
 
 	/**

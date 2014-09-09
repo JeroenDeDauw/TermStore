@@ -9,6 +9,10 @@ Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 
 ## Release notes
 
+### Version 0.2 (2014-09-09)
+
+* Added `EntityIdLookup`, which is now implemented by `TermStore`
+
 ### Version 0.1 (2014-06-23)
 
 * Initial release

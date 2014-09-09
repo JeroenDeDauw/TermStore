@@ -7,6 +7,7 @@ use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreInstaller;
 use Queryr\TermStore\TermStore;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
@@ -167,6 +168,106 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame(
 			'Q1337',
 			$this->store->getIdByLabel( 'en', 'en LABEL' )
+		);
+	}
+
+	public function testGetItemIdByLabelReturnsNoPropertyIds() {
+		$id = new PropertyId( 'P1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'some label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertNull( $this->store->getItemIdByLabel( 'en', 'some label' ) );
+	}
+
+	public function testGetPropertyIdByLabelReturnsNoItemIds() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'some label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertNull( $this->store->getPropertyIdByLabel( 'en', 'some label' ) );
+	}
+
+	public function testGetItemIdByLabelReturnsItemIds() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'some label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertSame(
+			'Q1337',
+			$this->store->getItemIdByLabel( 'en', 'some label' )
+		);
+	}
+
+	public function testGetPropertyIdByLabelReturnsPropertyIds() {
+		$id = new PropertyId( 'P1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'some label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertSame(
+			'P1337',
+			$this->store->getPropertyIdByLabel( 'en', 'some label' )
+		);
+	}
+
+	public function testGetItemIdByTextReturnsNoPropertyIds() {
+		$id = new PropertyId( 'P1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'some label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertNull( $this->store->getItemIdByText( 'en', 'some label' ) );
+	}
+
+	public function testGetPropertyIdByTextReturnsNoItemIds() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'some label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertNull( $this->store->getPropertyIdByText( 'en', 'some label' ) );
+	}
+
+	public function testGetItemIdByTextReturnsItemIds() {
+		$id = new ItemId( 'Q1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'some label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertSame(
+			'Q1337',
+			$this->store->getItemIdByText( 'en', 'some label' )
+		);
+	}
+
+	public function testGetPropertyIdByTextReturnsPropertyIds() {
+		$id = new PropertyId( 'P1337' );
+
+		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint->setLabel( 'en', 'some label' );
+
+		$this->store->storeEntityFingerprint( $id, $fingerprint );
+
+		$this->assertSame(
+			'P1337',
+			$this->store->getPropertyIdByText( 'en', 'some label' )
 		);
 	}
 

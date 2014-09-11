@@ -9,7 +9,7 @@ Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 
 ## Release notes
 
-### Version 0.2 (2014-09-09)
+### Version 0.2 (2014-09-11)
 
 * Added `TermStoreFactory`. Service construction should now happen via this factory
 * Added `EntityIdLookup`, which is now implemented by `TermStore`

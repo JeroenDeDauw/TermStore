@@ -9,6 +9,10 @@ Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 
 ## Release notes
 
+### Version 0.2.1 (2014-10-05)
+
+* Improved performance of `TermStore::storeEntityFingerprint` via usage of a transaction
+
 ### Version 0.2 (2014-09-11)
 
 * Added `TermStoreFactory`. Service construction should now happen via this factory

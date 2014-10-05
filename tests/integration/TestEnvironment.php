@@ -14,6 +14,15 @@ class TestEnvironment {
 
 	public static function newInstance() {
 		$instance = new self();
+
+		$instance->initialize();
+		$instance->getFactory()->newTermStoreInstaller()->install();
+
+		return $instance;
+	}
+
+	public static function newInstanceWithoutTables() {
+		$instance = new self();
 		$instance->initialize();
 		return $instance;
 	}
@@ -33,8 +42,6 @@ class TestEnvironment {
 
 		$config = new TermStoreConfig( 'ts_' );
 		$this->factory = new TermStoreFactory( $connection, $config );
-
-		$this->factory->newTermStoreInstaller()->install();
 	}
 
 	public function getFactory() {

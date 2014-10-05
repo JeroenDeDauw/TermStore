@@ -30,25 +30,34 @@ class TermStoreWriter {
 	 * @throws TermStoreException
 	 */
 	public function storeEntityFingerprint( EntityId $id, Fingerprint $fingerprint ) {
+		$this->connection->beginTransaction();
+
 		$this->dropTermsForId( $id );
 
 		try {
-			/**
-			 * @var Term $label
-			 */
-			foreach ( $fingerprint->getLabels() as $label ) {
-				$this->storeLabel( $label->getLanguageCode(), $label->getText(), $id );
-			}
-
-			/**
-			 * @var AliasGroup $aliasGroup
-			 */
-			foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
-				$this->storeAliases( $aliasGroup, $id );
-			}
+			$this->storeFingerprintParts( $id, $fingerprint );
 		}
 		catch ( DBALException $ex ) {
+			$this->connection->rollBack();
 			throw new TermStoreException( $ex->getMessage(), $ex );
+		}
+
+		$this->connection->commit();
+	}
+
+	private function storeFingerprintParts( EntityId $id, Fingerprint $fingerprint ) {
+		/**
+		 * @var Term $label
+		 */
+		foreach ( $fingerprint->getLabels() as $label ) {
+			$this->storeLabel( $label->getLanguageCode(), $label->getText(), $id );
+		}
+
+		/**
+		 * @var AliasGroup $aliasGroup
+		 */
+		foreach ( $fingerprint->getAliasGroups() as $aliasGroup ) {
+			$this->storeAliases( $aliasGroup, $id );
 		}
 	}
 

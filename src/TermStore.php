@@ -5,9 +5,7 @@ namespace Queryr\TermStore;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\Term;
 
 /**
  * @licence GNU GPL v2+

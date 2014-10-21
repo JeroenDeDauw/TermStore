@@ -9,6 +9,10 @@ Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 
 ## Release notes
 
+### Version 0.2.1 (2014-10-21)
+
+* Installation with DataModel 2.x is now allowed
+
 ### Version 0.2.1 (2014-10-05)
 
 * Improved performance of `TermStore::storeEntityFingerprint` via usage of a transaction

@@ -26,7 +26,9 @@
 	},
 	"require-dev": {
 		"ext-sqlite3": "*",
-		"whatthejeff/nyancat-phpunit-resultprinter": "~1.2"
+		"whatthejeff/nyancat-phpunit-resultprinter": "~1.2",
+		"squizlabs/php_codesniffer": "~2.3",
+		"phpmd/phpmd": "~2.3"
 	},
 	"autoload": {
 		"psr-4": {
@@ -37,5 +39,25 @@
 		"branch-alias": {
 			"dev-master": "0.2.x-dev"
 		}
+	},
+	"scripts": {
+		"test": [
+			"composer validate --no-interaction",
+			"phpunit"
+		],
+		"cs": [
+			"composer phpcs",
+			"composer phpmd"
+		],
+		"ci": [
+			"composer test",
+			"composer cs"
+		],
+		"phpcs": [
+			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
+		],
+		"phpmd": [
+			"vendor/bin/phpmd src/,tests/ text phpmd.xml"
+		]
 	}
 }

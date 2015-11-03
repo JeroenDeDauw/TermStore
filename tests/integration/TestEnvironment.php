@@ -15,16 +15,13 @@ class TestEnvironment {
 	public static function newInstance() {
 		$instance = new self();
 
-		$instance->initialize();
 		$instance->getFactory()->newTermStoreInstaller()->install();
 
 		return $instance;
 	}
 
 	public static function newInstanceWithoutTables() {
-		$instance = new self();
-		$instance->initialize();
-		return $instance;
+		return new self();
 	}
 
 	/**
@@ -32,12 +29,10 @@ class TestEnvironment {
 	 */
 	private $factory;
 
-	private function __construct() {}
-
-	private function initialize() {
+	private function __construct() {
 		$connection = DriverManager::getConnection( array(
-			'driver' => 'pdo_sqlite',
-			'memory' => true,
+				'driver' => 'pdo_sqlite',
+				'memory' => true,
 		) );
 
 		$config = new TermStoreConfig( 'ts_' );

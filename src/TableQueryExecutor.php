@@ -21,19 +21,19 @@ class TableQueryExecutor {
 	}
 
 	public function selectOneField( $fieldName, array $conditions = [] ) {
-		return $this->selectOne( [ $fieldName ], $conditions )[ $fieldName ];
+		return $this->selectOne( [ $fieldName ], $conditions )[$fieldName];
 	}
 
 	public function selectOne( array $fieldNames = null, array $conditions = [] ) {
 		$statement = $this->executeSelect( $fieldNames, $conditions, 1 );
 
 		$result = $statement->fetch();
-		return  $result === false ? null : $result;
+		return $result === false ? null : $result;
 	}
 
 	public function select( array $fieldNames = null, array $conditions = [] ) {
 		$statement = $this->executeSelect( $fieldNames, $conditions );
-		return  $statement->fetchAll();
+		return $statement->fetchAll();
 	}
 
 	public function selectField( $fieldName, array $conditions = [] ) {

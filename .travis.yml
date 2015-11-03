@@ -10,7 +10,7 @@ sudo: false
 
 install: travis_retry composer install
 
-script: phpunit
+script: composer ci
 
 cache:
   directories:

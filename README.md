@@ -1,5 +1,11 @@
 # QueryR TermStore
 
+[![Build Status](https://secure.travis-ci.org/JeroenDeDauw/TermStore.png?branch=master)](http://travis-ci.org/JeroenDeDauw/TermStore)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/JeroenDeDauw/TermStore/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/JeroenDeDauw/TermStore/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/JeroenDeDauw/TermStore/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/JeroenDeDauw/TermStore/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/queryr/term-store/version.png)](https://packagist.org/packages/queryr/term-store)
+[![Download count](https://poser.pugx.org/queryr/term-store/d/total.png)](https://packagist.org/packages/queryr/term-store)
+
 Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 
 * lookup of EntityIds given a term

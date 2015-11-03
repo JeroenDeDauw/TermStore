@@ -15,11 +15,12 @@ Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 
 ## Release notes
 
-### Version 0.2.3 (2015-11-03)
+### Version 1.0.0 (2015-11-03)
 
 * Installation with Wikibase DataModel 4.x is now allowed
 * Installation with Wikibase DataModel 3.x is now allowed
 * Changed minimum Wikibase DataModel version to 2.5
+* Added ci command that runs PHPUnit, PHPCS, PHPMD and covers tags validation
 
 ### Version 0.2.2 (2014-10-21)
 

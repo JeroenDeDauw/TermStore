@@ -8,12 +8,12 @@ use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreInstaller;
 
 /**
- * @covers Queryr\TermStore\StoreInstaller
+ * @covers Queryr\TermStore\TermStoreInstaller
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StoreInstallerTest extends \PHPUnit_Framework_TestCase {
+class TermStoreInstallerTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @var TermStoreInstaller

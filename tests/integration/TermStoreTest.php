@@ -10,6 +10,10 @@ use Wikibase\DataModel\Term\Fingerprint;
 /**
  * @covers Queryr\TermStore\TermStore
  *
+ * @covers Queryr\TermStore\IdLookup
+ * @covers Queryr\TermStore\TermStoreWriter
+ * @covers Queryr\TermStore\TableQueryExecutor
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

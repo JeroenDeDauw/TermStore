@@ -13,6 +13,25 @@ Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 * storing a Fingerprint for an EntityId
 * removing all terms associated with an EntityId
 
+## System dependencies
+
+* PHP 5.5 or later
+* php5-sqlite (only needed for running the tests)
+
+## Running the tests
+
+For tests only
+
+    composer test
+
+For style checks only
+
+	composer cs
+
+For a full CI run
+
+	composer ci
+
 ## Release notes
 
 ### Version 1.0.0 (2015-11-03)

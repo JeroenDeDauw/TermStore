@@ -1,5 +1,23 @@
 {
 	"name": "queryr/term-store",
+	"type": "library",
+	"description": "Persistence of Wikibase terms with lookups of those terms and by those terms",
+	"keywords": [
+		"Wikibase",
+		"DataModel",
+		"Terms",
+		"Fingerprint",
+		"Lookup"
+	],
+	"homepage": "https://github.com/JeroenDeDauw/TermStore",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Jeroen De Dauw",
+			"email": "jeroendedauw@gmail.com",
+			"homepage": "http://jeroendedauw.com"
+		}
+	],
 	"require": {
 		"php": ">=5.5.0",
 

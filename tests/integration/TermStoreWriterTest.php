@@ -27,7 +27,7 @@ class TermStoreWriterTest extends \PHPUnit_Framework_TestCase {
 		$writer = TestEnvironment::newInstanceWithoutTables()->getFactory()->newTermStoreWriter();
 
 		$this->setExpectedException( 'Queryr\TermStore\TermStoreException' );
-		$writer->storeEntityFingerprint( new ItemId( 'Q1' ), Fingerprint::newEmpty() );
+		$writer->storeEntityFingerprint( new ItemId( 'Q1' ), new Fingerprint() );
 	}
 
 	public function testWhenNoConnection_dropTermsForIdThrowsException() {

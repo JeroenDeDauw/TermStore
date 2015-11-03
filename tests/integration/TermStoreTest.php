@@ -31,7 +31,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testStoreIdAndFingerprint() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'en label' );
 		$fingerprint->setLabel( 'de', 'de label' );
 		$fingerprint->setDescription( 'en', 'en description' );
@@ -58,7 +58,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetIdByLabelAndLanguage() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'en label' );
 		$fingerprint->setLabel( 'de', 'de label' );
 
@@ -73,14 +73,14 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testStoreFingerprintRemovesOldData() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'en label' );
 		$fingerprint->setLabel( 'de', 'de label' );
 		$fingerprint->setAliasGroup( 'en', [ 'first en alias', 'second en alias' ] );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'de', 'new de label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
@@ -101,7 +101,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetIdByTextReturnsMatchBasedOnLabel() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'kittens' );
 		$fingerprint->setAliasGroup( 'en', [ 'first en alias', 'second en alias' ] );
 
@@ -109,7 +109,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$id = new ItemId( 'Q42' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'foobar' );
 		$fingerprint->setAliasGroup( 'en', [ 'kittens', 'first en alias' ] );
 
@@ -124,7 +124,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetIdByTextReturnsAliasBasedMatchIfNoLabelsMatch() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'foobar' );
 		$fingerprint->setAliasGroup( 'en', [ 'first en alias', 'second en alias' ] );
 
@@ -132,7 +132,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 
 		$id = new ItemId( 'Q42' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'foobar' );
 		$fingerprint->setAliasGroup( 'en', [ 'kittens', 'first en alias' ] );
 
@@ -147,7 +147,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testByLabelLookupIsCaseInsensitive() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'EN label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
@@ -161,7 +161,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetItemIdByLabelReturnsNoPropertyIds() {
 		$id = new PropertyId( 'P1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'some label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
@@ -172,7 +172,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetPropertyIdByLabelReturnsNoItemIds() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'some label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
@@ -183,7 +183,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetItemIdByLabelReturnsItemIds() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'some label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
@@ -197,7 +197,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetPropertyIdByLabelReturnsPropertyIds() {
 		$id = new PropertyId( 'P1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'some label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
@@ -211,7 +211,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetItemIdByTextReturnsNoPropertyIds() {
 		$id = new PropertyId( 'P1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'some label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
@@ -222,7 +222,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetPropertyIdByTextReturnsNoItemIds() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'some label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
@@ -233,7 +233,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetItemIdByTextReturnsItemIds() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'some label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
@@ -247,7 +247,7 @@ class TermStoreTest extends \PHPUnit_Framework_TestCase {
 	public function testGetPropertyIdByTextReturnsPropertyIds() {
 		$id = new PropertyId( 'P1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'some label' );
 
 		$this->store->storeEntityFingerprint( $id, $fingerprint );

@@ -33,7 +33,7 @@ class TermStoreExceptionTest extends \PHPUnit_Framework_TestCase {
 	public function testInsertWhenStoreNotInstalledCausesTermStoreException() {
 		$id = new ItemId( 'Q1337' );
 
-		$fingerprint = Fingerprint::newEmpty();
+		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'EN label' );
 
 		$this->setExpectedException( 'Queryr\TermStore\TermStoreException' );

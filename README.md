@@ -9,9 +9,15 @@ Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 
 ## Release notes
 
+### Version 0.2.3 (2015-11-03)
+
+* Installation with Wikibase DataModel 4.x is now allowed
+* Installation with Wikibase DataModel 3.x is now allowed
+* Changed minimum Wikibase DataModel version to 2.5
+
 ### Version 0.2.2 (2014-10-21)
 
-* Installation with DataModel 2.x is now allowed
+* Installation with Wikibase DataModel 2.x is now allowed
 
 ### Version 0.2.1 (2014-10-05)
 

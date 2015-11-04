@@ -15,7 +15,7 @@ Stores terms of [Wikibase](http://wikiba.se) entities to facilitate
 
 ## System dependencies
 
-* PHP 5.5 or later
+* PHP 5.5 or later (PHP 7 and HHVM are supported)
 * php5-sqlite (only needed for running the tests)
 
 ## Running the tests

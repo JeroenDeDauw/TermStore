@@ -40,6 +40,7 @@ For a full CI run
 * Installation with Wikibase DataModel 3.x is now allowed
 * Changed minimum Wikibase DataModel version to 2.5
 * Added ci command that runs PHPUnit, PHPCS, PHPMD and covers tags validation
+* Added TravisCI and ScrutinizerCI integration
 
 ### Version 0.2.2 (2014-10-21)
 

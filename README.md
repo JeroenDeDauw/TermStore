@@ -64,16 +64,18 @@ $idLookup = $factory->newEntityIdLookup();
 $idLookup->getItemIdByLabel( $languageCode, $labelText );
 $idLookup->getItemIdByText( $languageCode, $termText );
 $idLookup->getIdByLabel( $languageCode, $labelText );
-// see the EntityIdLookup for all methods and their documentation
 ```
+
+See the `EntityIdLookup` interface for all methods and their documentation.
 
 ### Lookup label based on EntityId and language
 
 ```php
 $labelLookup = $factory->newLabelLookup();
 $labelLookup->getLabelByIdAndLanguage( $entityId, $languageCode );
-// see the LabelLookup interface for documentation
 ```
+
+See the `LabelLookup` interface for documentation.
 
 ## Running the tests
 

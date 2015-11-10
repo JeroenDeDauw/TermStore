@@ -33,6 +33,48 @@ TermStore 1.x:
 }
 ```
 
+## Usage
+
+All services are constructed via the `TermStoreFactory` class:
+
+```php
+use Queryr\TermStore\TermStoreFactory;
+$factory = new TermStoreFactory(
+	$dbalConnection,
+	new TermStoreConfig( /* optional config */ )
+);
+```
+
+`$dbalConnection` is a `Connection` object from [Doctrine DBAL](https://github.com/doctrine/dbal).
+
+### Writing to the store
+
+```php
+$writer = $factory->newTermStoreWriter();
+
+$writer->storeEntityFingerprint( $entityId, $fingerprint );
+$writer->dropTermsForId( $entityId );
+```
+
+### Lookup up an EntityId based on terms
+
+```php
+$idLookup = $factory->newEntityIdLookup();
+
+$idLookup->getItemIdByLabel( $languageCode, $labelText );
+$idLookup->getItemIdByText( $languageCode, $termText );
+$idLookup->getIdByLabel( $languageCode, $labelText );
+// see the EntityIdLookup for all methods and their documentation
+```
+
+### Lookup label based on EntityId and language
+
+```php
+$labelLookup = $factory->newLabelLookup();
+$labelLookup->getLabelByIdAndLanguage( $entityId, $languageCode );
+// see the LabelLookup interface for documentation
+```
+
 ## Running the tests
 
 For tests only
@@ -48,6 +90,11 @@ For a full CI run
 	composer ci
 
 ## Release notes
+
+### Version 1.1.0 (2015-11-10)
+
+* Added `newLabelLookup` to `TermStoreFactory`
+* Improved documentation
 
 ### Version 1.0.0 (2015-11-03)
 

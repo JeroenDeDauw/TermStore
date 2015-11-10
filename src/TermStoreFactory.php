@@ -5,6 +5,9 @@ namespace Queryr\TermStore;
 use Doctrine\DBAL\Connection;
 
 /**
+ * Package public
+ * @since 0.2
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -43,7 +46,16 @@ class TermStoreFactory {
 	}
 
 	/**
-	 * Work with a more segregated interface if you can.
+	 * @since 1.1
+	 *
+	 * @return LabelLookup
+	 */
+	public function newLabelLookup() {
+		return $this->newTermStore();
+	}
+
+	/**
+	 * Work with a more segregated interface (TermStoreWriter, EntityIdLookup, LabelLookup) if you can.
 	 *
 	 * @return TermStore
 	 */

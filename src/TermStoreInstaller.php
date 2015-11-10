@@ -8,6 +8,9 @@ use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Types\Type;
 
 /**
+ * Package public, except for the constructor
+ * @since 0.2
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

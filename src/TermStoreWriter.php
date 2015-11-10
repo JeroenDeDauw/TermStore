@@ -10,6 +10,9 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 
 /**
+ * Package public
+ * @since 0.2
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

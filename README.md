@@ -35,6 +35,8 @@ TermStore 1.x:
 
 ## Usage
 
+If you are curious what the database schema is, look at `src/TermStoreInstaller.php`.
+
 All services are constructed via the `TermStoreFactory` class:
 
 ```php

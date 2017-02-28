@@ -95,6 +95,11 @@ For a full CI run
 
 ## Release notes
 
+### Version 1.2.0 (2017-02-28)
+
+* Installation with Wikibase DataModel 6.x is now allowed
+* Installation with Wikibase DataModel 5.x is now allowed
+
 ### Version 1.1.0 (2015-11-10)
 
 * Added `newLabelLookup` to `TermStoreFactory`

@@ -4,7 +4,14 @@ inherit: true
 before_commands:
   - "composer install --prefer-source"
 
+checks:
+    php:
+        code_rating: true
+        duplication: true
+
 tools:
+    external_code_coverage:
+        timeout: 900
     php_code_coverage: true
     php_code_sniffer: true
     php_cpd: true

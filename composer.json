@@ -21,13 +21,15 @@
 	"require": {
 		"php": ">=5.5.0",
 
-		"wikibase/data-model": "~4.0|~3.0|~2.5",
+		"wikibase/data-model": "~6.0|~5.0|~4.0|~3.0|~2.5",
 		"doctrine/dbal": "~2.4"
 	},
 	"require-dev": {
 		"ext-pdo_sqlite": "*",
+
+		"phpunit/phpunit": "~5.3.0|~4.8",
 		"whatthejeff/nyancat-phpunit-resultprinter": "~1.2",
-		"ockcyp/covers-validator": "~0.2.0",
+		"ockcyp/covers-validator": "~0.4.0",
 		"squizlabs/php_codesniffer": "~2.3",
 		"phpmd/phpmd": "~2.3"
 	},
@@ -44,16 +46,16 @@
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
-			"phpunit",
+			"vendor/bin/phpunit",
 			"vendor/bin/covers-validator"
 		],
 		"cs": [
-			"composer phpcs",
-			"composer phpmd"
+			"@phpcs",
+			"@phpmd"
 		],
 		"ci": [
-			"composer test",
-			"composer cs"
+			"@test",
+			"@cs"
 		],
 		"phpcs": [
 			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"

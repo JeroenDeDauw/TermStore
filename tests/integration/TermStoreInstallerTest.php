@@ -4,16 +4,17 @@ namespace Tests\Queryr\TermStore;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use PHPUnit\Framework\TestCase;
 use Queryr\TermStore\TermStoreConfig;
 use Queryr\TermStore\TermStoreInstaller;
 
 /**
- * @covers Queryr\TermStore\TermStoreInstaller
+ * @covers \Queryr\TermStore\TermStoreInstaller
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermStoreInstallerTest extends \PHPUnit_Framework_TestCase {
+class TermStoreInstallerTest extends TestCase {
 
 	/**
 	 * @var TermStoreInstaller
@@ -49,6 +50,7 @@ class TermStoreInstallerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testStoresPage() {
 		$this->storeInstaller->install();
+		$this->assertTrue( true );
 	}
 
 }

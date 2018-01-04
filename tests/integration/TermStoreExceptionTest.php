@@ -3,18 +3,20 @@
 namespace Tests\Queryr\TermStore;
 
 use Doctrine\DBAL\DriverManager;
+use PHPUnit\Framework\TestCase;
 use Queryr\TermStore\TermStore;
 use Queryr\TermStore\TermStoreConfig;
+use Queryr\TermStore\TermStoreException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
- * @covers Queryr\TermStore\TermStore
+ * @covers \Queryr\TermStore\TermStore
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermStoreExceptionTest extends \PHPUnit_Framework_TestCase {
+class TermStoreExceptionTest extends TestCase {
 
 	/**
 	 * @var TermStore
@@ -36,7 +38,7 @@ class TermStoreExceptionTest extends \PHPUnit_Framework_TestCase {
 		$fingerprint = new Fingerprint();
 		$fingerprint->setLabel( 'en', 'EN label' );
 
-		$this->setExpectedException( 'Queryr\TermStore\TermStoreException' );
+		$this->expectException( TermStoreException::class );
 		$this->store->storeEntityFingerprint( $id, $fingerprint );
 	}
 

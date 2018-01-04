@@ -2,22 +2,23 @@
 
 namespace Tests\Queryr\TermStore;
 
+use PHPUnit\Framework\TestCase;
 use Queryr\TermStore\TermStore;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
- * @covers Queryr\TermStore\TermStore
+ * @covers \Queryr\TermStore\TermStore
  *
- * @covers Queryr\TermStore\IdLookup
- * @covers Queryr\TermStore\TermStoreWriter
- * @covers Queryr\TermStore\TableQueryExecutor
+ * @covers \Queryr\TermStore\IdLookup
+ * @covers \Queryr\TermStore\TermStoreWriter
+ * @covers \Queryr\TermStore\TableQueryExecutor
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermStoreTest extends \PHPUnit_Framework_TestCase {
+class TermStoreTest extends TestCase {
 
 	/**
 	 * @var TermStore

@@ -2,17 +2,19 @@
 
 namespace Tests\Queryr\TermStore;
 
+use PHPUnit\Framework\TestCase;
+use Queryr\TermStore\TermStoreException;
 use Queryr\TermStore\TermStoreWriter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 
 /**
- * @covers Queryr\TermStore\TermStoreWriter
+ * @covers \Queryr\TermStore\TermStoreWriter
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermStoreWriterTest extends \PHPUnit_Framework_TestCase {
+class TermStoreWriterTest extends TestCase {
 
 	/**
 	 * @var TermStoreWriter
@@ -26,14 +28,14 @@ class TermStoreWriterTest extends \PHPUnit_Framework_TestCase {
 	public function testWhenNoConnection_storeEntityFingerprintThrowsException() {
 		$writer = TestEnvironment::newInstanceWithoutTables()->getFactory()->newTermStoreWriter();
 
-		$this->setExpectedException( 'Queryr\TermStore\TermStoreException' );
+		$this->expectException( TermStoreException::class );
 		$writer->storeEntityFingerprint( new ItemId( 'Q1' ), new Fingerprint() );
 	}
 
 	public function testWhenNoConnection_dropTermsForIdThrowsException() {
 		$writer = TestEnvironment::newInstanceWithoutTables()->getFactory()->newTermStoreWriter();
 
-		$this->setExpectedException( 'Queryr\TermStore\TermStoreException' );
+		$this->expectException( TermStoreException::class );
 		$writer->dropTermsForId( new ItemId( 'Q1' ) );
 	}
 

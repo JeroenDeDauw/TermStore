@@ -95,6 +95,11 @@ For a full CI run
 
 ## Release notes
 
+### Version 1.3.0 (2018-01-04)
+
+* Bumped minimum PHP version to 7.1
+* Added scalar and return type hints
+
 ### Version 1.2.0 (2017-02-28)
 
 * Installation with Wikibase DataModel 6.x is now allowed

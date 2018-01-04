@@ -25,7 +25,7 @@ dependency on `queryr/term-store` to your project's `composer.json` file.
 Here is a minimal example of a `composer.json` file that just defines a dependency on
 TermStore 1.x:
 
-```js
+```json
 {
     "require": {
         "queryr/term-store": "~1.0"

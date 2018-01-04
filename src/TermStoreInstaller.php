@@ -27,12 +27,12 @@ class TermStoreInstaller {
 	/**
 	 * @throws DBALException
 	 */
-	public function install() {
+	public function install(): void {
 		$this->schemaManager->createTable( $this->newLabelTable() );
 		$this->schemaManager->createTable( $this->newAliasesTable() );
 	}
 
-	private function newLabelTable() {
+	private function newLabelTable(): Table {
 		$table = new Table( $this->config->getLabelTableName() );
 
 		$table->addColumn( 'text', Type::STRING, array( 'length' => 255 ) );
@@ -48,7 +48,7 @@ class TermStoreInstaller {
 		return $table;
 	}
 
-	private function newAliasesTable() {
+	private function newAliasesTable(): Table {
 		$table = new Table( $this->config->getAliasesTableName() );
 
 		$table->addColumn( 'text', Type::STRING, array( 'length' => 255 ) );
@@ -64,7 +64,10 @@ class TermStoreInstaller {
 		return $table;
 	}
 
-	public function uninstall() {
+	/**
+	 * @throws DBALException
+	 */
+	public function uninstall(): void {
 		$this->schemaManager->dropTable( $this->config->getLabelTableName() );
 		$this->schemaManager->dropTable( $this->config->getAliasesTableName() );
 	}

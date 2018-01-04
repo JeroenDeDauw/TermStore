@@ -20,6 +20,6 @@ interface LabelLookup {
 	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getLabelByIdAndLanguage( EntityId $id, $languageCode );
+	public function getLabelByIdAndLanguage( EntityId $id, string $languageCode ): ?string;
 
 }

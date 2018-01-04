@@ -21,45 +21,32 @@ class TermStoreFactory {
 		$this->config = $config;
 	}
 
-	public function newTermStoreInstaller() {
+	public function newTermStoreInstaller(): TermStoreInstaller {
 		return new TermStoreInstaller(
 			$this->connection->getSchemaManager(),
 			$this->config
 		);
 	}
 
-	/**
-	 * @return EntityIdLookup
-	 */
-	public function newEntityIdLookup() {
+	public function newEntityIdLookup(): EntityIdLookup {
 		$labelTable = new TableQueryExecutor( $this->connection, $this->config->getLabelTableName() );
 		$aliasesTable = new TableQueryExecutor( $this->connection, $this->config->getAliasesTableName() );
 
 		return new IdLookup( $labelTable, $aliasesTable );
 	}
 
-	/**
-	 * @return TermStoreWriter
-	 */
-	public function newTermStoreWriter() {
+	public function newTermStoreWriter(): TermStoreWriter {
 		return new TermStoreWriter( $this->connection, $this->config );
 	}
 
-	/**
-	 * @since 1.1
-	 *
-	 * @return LabelLookup
-	 */
-	public function newLabelLookup() {
+	public function newLabelLookup(): LabelLookup {
 		return $this->newTermStore();
 	}
 
 	/**
 	 * Work with a more segregated interface (TermStoreWriter, EntityIdLookup, LabelLookup) if you can.
-	 *
-	 * @return TermStore
 	 */
-	public function newTermStore() {
+	public function newTermStore(): TermStore {
 		return new TermStore( $this->connection, $this->config );
 	}
 

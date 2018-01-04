@@ -13,15 +13,15 @@ class TermStoreConfig {
 
 	private $prefix;
 
-	public function __construct( $tablePrefix = '' ) {
+	public function __construct( string $tablePrefix = '' ) {
 		$this->prefix = $tablePrefix;
 	}
 
-	public function getLabelTableName() {
+	public function getLabelTableName(): string {
 		return $this->prefix . 'labels';
 	}
 
-	public function getAliasesTableName() {
+	public function getAliasesTableName(): string {
 		return $this->prefix . 'aliases';
 	}
 

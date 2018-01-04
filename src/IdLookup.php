@@ -23,39 +23,27 @@ class IdLookup implements EntityIdLookup {
 	/**
 	 * Returns the first matching entity id. Case insensitive.
 	 *
-	 * @param string $labelLanguageCode
-	 * @param string $labelText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getIdByLabel( $labelLanguageCode, $labelText ) {
+	public function getIdByLabel( string $labelLanguageCode, string $labelText ): ?string {
 		return $this->getEntityIdByLabel( $labelLanguageCode, $labelText );
 	}
 
 	/**
 	 * Returns the first matching item id. Case insensitive.
 	 *
-	 * @param string $labelLanguageCode
-	 * @param string $labelText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getItemIdByLabel( $labelLanguageCode, $labelText ) {
+	public function getItemIdByLabel( string $labelLanguageCode, string $labelText ): ?string {
 		return $this->getEntityIdByLabel( $labelLanguageCode, $labelText, 'item' );
 	}
 
 	/**
 	 * Returns the first matching property id. Case insensitive.
 	 *
-	 * @param string $labelLanguageCode
-	 * @param string $labelText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getPropertyIdByLabel( $labelLanguageCode, $labelText ) {
+	public function getPropertyIdByLabel( string $labelLanguageCode, string $labelText ): ?string {
 		return $this->getEntityIdByLabel( $labelLanguageCode, $labelText, 'property' );
 	}
 
@@ -91,39 +79,27 @@ class IdLookup implements EntityIdLookup {
 	/**
 	 * Returns the first matching entity id. Case insensitive.
 	 *
-	 * @param string $languageCode
-	 * @param string $termText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getIdByText( $languageCode, $termText ) {
+	public function getIdByText( string $languageCode, string $termText ): ?string {
 		return $this->getEntityIdByText( $languageCode, $termText );
 	}
 
 	/**
 	 * Returns the first matching item id. Case insensitive.
 	 *
-	 * @param string $languageCode
-	 * @param string $termText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getItemIdByText( $languageCode, $termText ) {
+	public function getItemIdByText( string $languageCode, string $termText ): ?string {
 		return $this->getEntityIdByText( $languageCode, $termText, 'item' );
 	}
 
 	/**
 	 * Returns the first matching property id. Case insensitive.
 	 *
-	 * @param string $languageCode
-	 * @param string $termText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getPropertyIdByText( $languageCode, $termText ) {
+	public function getPropertyIdByText( string $languageCode, string $termText ): ?string {
 		return $this->getEntityIdByText( $languageCode, $termText, 'property' );
 	}
 
@@ -135,7 +111,7 @@ class IdLookup implements EntityIdLookup {
 	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	private function getEntityIdByText( $languageCode, $termText, $entityTypeFilter = null ) {
+	private function getEntityIdByText( string $languageCode, string $termText, $entityTypeFilter = null ) {
 		$labelMatch = $this->getEntityIdByLabel( $languageCode, $termText, $entityTypeFilter );
 
 		if ( $labelMatch !== null ) {
@@ -153,7 +129,7 @@ class IdLookup implements EntityIdLookup {
 	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	private function getIdByAlias( $aliasLanguageCode, $aliasText, $entityTypeFilter = null ) {
+	private function getIdByAlias( string $aliasLanguageCode, string $aliasText, $entityTypeFilter = null ) {
 		$conditions = [
 			'text_lowercase' => strtolower( $aliasText ),
 			'language' => $aliasLanguageCode

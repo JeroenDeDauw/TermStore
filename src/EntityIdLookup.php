@@ -20,7 +20,7 @@ interface EntityIdLookup {
 	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getIdByLabel( $labelLanguageCode, $labelText );
+	public function getIdByLabel( string $labelLanguageCode, string $labelText ): ?string;
 
 	/**
 	 * Returns the first matching item id. Case insensitive.
@@ -31,7 +31,7 @@ interface EntityIdLookup {
 	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getItemIdByLabel( $labelLanguageCode, $labelText );
+	public function getItemIdByLabel( string $labelLanguageCode, string $labelText ): ?string;
 
 	/**
 	 * Returns the first matching property id. Case insensitive.
@@ -42,7 +42,7 @@ interface EntityIdLookup {
 	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getPropertyIdByLabel( $labelLanguageCode, $labelText );
+	public function getPropertyIdByLabel( string $labelLanguageCode, string $labelText ): ?string;
 
 	/**
 	 * Returns the first matching entity id. Case insensitive.
@@ -53,7 +53,7 @@ interface EntityIdLookup {
 	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getIdByText( $languageCode, $termText );
+	public function getIdByText( string $languageCode, string $termText ): ?string;
 
 	/**
 	 * Returns the first matching item id. Case insensitive.
@@ -64,7 +64,7 @@ interface EntityIdLookup {
 	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getItemIdByText( $languageCode, $termText );
+	public function getItemIdByText( string $languageCode, string $termText ): ?string;
 
 	/**
 	 * Returns the first matching property id. Case insensitive.
@@ -75,6 +75,6 @@ interface EntityIdLookup {
 	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getPropertyIdByText( $languageCode, $termText );
+	public function getPropertyIdByText( string $languageCode, string $termText ): ?string;
 
 }

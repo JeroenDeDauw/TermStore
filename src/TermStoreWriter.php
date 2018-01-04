@@ -32,7 +32,7 @@ class TermStoreWriter {
 	 *
 	 * @throws TermStoreException
 	 */
-	public function storeEntityFingerprint( EntityId $id, Fingerprint $fingerprint ) {
+	public function storeEntityFingerprint( EntityId $id, Fingerprint $fingerprint ): void {
 		$this->connection->beginTransaction();
 
 		$this->dropTermsForId( $id );
@@ -48,6 +48,9 @@ class TermStoreWriter {
 		$this->connection->commit();
 	}
 
+	/**
+	 * @throws DBALException
+	 */
 	private function storeFingerprintParts( EntityId $id, Fingerprint $fingerprint ) {
 		/**
 		 * @var Term $label
@@ -69,7 +72,7 @@ class TermStoreWriter {
 	 *
 	 * @throws TermStoreException
 	 */
-	public function dropTermsForId( EntityId $id ) {
+	public function dropTermsForId( EntityId $id ): void {
 		try {
 			$this->connection->delete(
 				$this->config->getLabelTableName(),
@@ -86,7 +89,10 @@ class TermStoreWriter {
 		}
 	}
 
-	private function storeLabel( $languageCode, $text, EntityId $id ) {
+	/**
+	 * @throws DBALException
+	 */
+	private function storeLabel( string $languageCode, string $text, EntityId $id ) {
 		$this->connection->insert(
 			$this->config->getLabelTableName(),
 			[
@@ -99,6 +105,9 @@ class TermStoreWriter {
 		);
 	}
 
+	/**
+	 * @throws DBALException
+	 */
 	private function storeAliases( AliasGroup $aliasGroup, EntityId $id ) {
 		foreach ( $aliasGroup->getAliases() as $alias ) {
 			$this->connection->insert(

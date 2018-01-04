@@ -50,13 +50,9 @@ class TermStore implements LabelLookup, EntityIdLookup {
 	}
 
 	/**
-	 * @param EntityId $id
-	 * @param string $languageCode
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getLabelByIdAndLanguage( EntityId $id, $languageCode ) {
+	public function getLabelByIdAndLanguage( EntityId $id, string $languageCode ): ?string {
 		try {
 			return $this->labelTable->selectOneField(
 				'text',
@@ -78,7 +74,7 @@ class TermStore implements LabelLookup, EntityIdLookup {
 	 * @return string[]
 	 * @throws TermStoreException
 	 */
-	public function getAliasesByIdAndLanguage( EntityId $id, $languageCode ) {
+	public function getAliasesByIdAndLanguage( EntityId $id, string $languageCode ): array {
 		try {
 			return $this->aliasesTable->selectField(
 				'text',
@@ -96,78 +92,54 @@ class TermStore implements LabelLookup, EntityIdLookup {
 	/**
 	 * Returns the first matching entity id. Case insensitive.
 	 *
-	 * @param string $labelLanguageCode
-	 * @param string $labelText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getIdByLabel( $labelLanguageCode, $labelText ) {
+	public function getIdByLabel( string $labelLanguageCode, string $labelText ): ?string {
 		return $this->idLookup->getIdByLabel( $labelLanguageCode, $labelText );
 	}
 
 	/**
 	 * Returns the first matching item id. Case insensitive.
 	 *
-	 * @param string $labelLanguageCode
-	 * @param string $labelText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getItemIdByLabel( $labelLanguageCode, $labelText ) {
+	public function getItemIdByLabel( string $labelLanguageCode, string $labelText ): ?string {
 		return $this->idLookup->getItemIdByLabel( $labelLanguageCode, $labelText );
 	}
 
 	/**
 	 * Returns the first matching property id. Case insensitive.
 	 *
-	 * @param string $labelLanguageCode
-	 * @param string $labelText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getPropertyIdByLabel( $labelLanguageCode, $labelText ) {
+	public function getPropertyIdByLabel( string $labelLanguageCode, string $labelText ): ?string {
 		return $this->idLookup->getPropertyIdByLabel( $labelLanguageCode, $labelText );
 	}
 
 	/**
 	 * Returns the first matching entity id. Case insensitive.
 	 *
-	 * @param string $languageCode
-	 * @param string $termText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getIdByText( $languageCode, $termText ) {
+	public function getIdByText( string $languageCode, string $termText ): ?string {
 		return $this->idLookup->getIdByText( $languageCode, $termText );
 	}
 
 	/**
 	 * Returns the first matching item id. Case insensitive.
 	 *
-	 * @param string $languageCode
-	 * @param string $termText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getItemIdByText( $languageCode, $termText ) {
+	public function getItemIdByText( string $languageCode, string $termText ): ?string {
 		return $this->idLookup->getItemIdByText( $languageCode, $termText );
 	}
 
 	/**
 	 * Returns the first matching property id. Case insensitive.
 	 *
-	 * @param string $languageCode
-	 * @param string $termText
-	 *
-	 * @return string|null
 	 * @throws TermStoreException
 	 */
-	public function getPropertyIdByText( $languageCode, $termText ) {
+	public function getPropertyIdByText( string $languageCode, string $termText ): ?string {
 		return $this->idLookup->getPropertyIdByText( $languageCode, $termText );
 	}
 

@@ -10,7 +10,7 @@
 		"Lookup"
 	],
 	"homepage": "https://github.com/JeroenDeDauw/TermStore",
-	"license": "GPL-2.0+",
+	"license": "GPL-2.0-or-later",
 	"authors": [
 		{
 			"name": "Jeroen De Dauw",
